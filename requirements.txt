@@ -1,0 +1,15 @@
+# Decision Tree from Scratch - Requirements
+# ==========================================
+#
+# CORE DEPENDENCIES: None!
+# The custom implementation uses only Python standard library.
+#
+# OPTIONAL DEPENDENCIES:
+# sklearn is only used for optional benchmarking comparison.
+# The custom decision tree does NOT use sklearn for training.
+
+# Optional: For benchmark comparison only
+scikit-learn>=1.0.0
+
+# Optional: For better array handling in benchmark
+numpy>=1.21.0
