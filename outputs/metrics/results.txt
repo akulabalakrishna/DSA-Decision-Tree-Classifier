@@ -12,7 +12,7 @@ Hyperparameters:
 
 Results:
   Training Accuracy: 85.98%
-  Test Accuracy:     85.78%
+  Test Accuracy:     85.80%
   Tree Depth:        8
   Total Nodes:       163
   Leaf Nodes:        82

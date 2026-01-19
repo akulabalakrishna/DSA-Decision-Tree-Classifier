@@ -1,5 +1,10 @@
 """
-Splitter - Find the best split for a decision tree node.
+Splitter - Procedural logic to find optimal splits.
+
+This module contains the logic to iterate through features and thresholds
+to maximize Information Gain. It bridges the gap between the 
+Tree Building Algorithm (decision_tree.py) and the 
+Mathematical Functions (gini.py).
 """
 
 import sys

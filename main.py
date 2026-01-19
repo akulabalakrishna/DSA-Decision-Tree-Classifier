@@ -26,7 +26,7 @@ from preprocessing.data_loader import (
 from preprocessing.cleaner import clean_data
 from preprocessing.encoder import DataEncoder
 
-from evaluation.metrics import accuracy, classification_report, print_confusion_matrix
+from evaluation.metrics import accuracy, classification_report, print_confusion_matrix, root_mean_squared_error
 from evaluation.benchmark import compare_with_sklearn
 
 from utils.config import Config
@@ -154,11 +154,15 @@ def evaluate_model(model, train_data, train_labels, test_data, test_labels):
     test_predictions = model.predict(test_data)
     test_accuracy = accuracy(test_labels, test_predictions)
     
+    # Calculate RMSE if applicable (converted to float)
+    test_rmse = root_mean_squared_error(test_labels, test_predictions)
+    
     print("\n" + "-" * 40)
     print("RESULTS")
     print("-" * 40)
     print(f"Training Accuracy: {train_accuracy * 100:.2f}%")
     print(f"Test Accuracy:     {test_accuracy * 100:.2f}%")
+    print(f"Test RMSE:         {test_rmse:.4f}")
     print(f"Tree Depth:        {model.get_depth()}")
     print("-" * 40)
     
@@ -256,8 +260,7 @@ def main():
     print("PIPELINE COMPLETE!")
     print("=" * 60)
     print(f"\nCheck outputs in: {os.path.join(PROJECT_ROOT, Config.OUTPUT_DIR)}")
-    print("\nThank you for using Decision Tree from Scratch!")
-    print("=" * 60 + "\n")
+print("=" * 60 + "\n")
 
 
 if __name__ == "__main__":

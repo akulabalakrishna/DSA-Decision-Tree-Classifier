@@ -13,6 +13,24 @@ A complete implementation of a **CART-style Decision Tree Classifier** using cus
 - **Mixed Feature Types**: Supports both numerical and categorical features
 - **Pre-Pruning**: Configurable max_depth, min_samples_split, min_impurity_decrease
 
+## 📚 Terminology Clarification
+
+To ensure technical accuracy (as per Course Requirements):
+
+- **Algorithm**: The procedural logic that builds the model. In this project, it is the **CART (Classification and Regression Trees)** algorithm. It uses a recursive approach to build a binary tree.  
+  *Location: `custom_ml/decision_tree.py`*
+
+- **Mathematical Functions**: The tools used by the algorithm to make decisions. These are NOT the algorithm itself.
+  - **Gini Impurity**: Measures the likelihood of incorrect classification.
+  - **Information Gain**: measures the reduction in impurity.  
+  *Location: `custom_ml/gini.py`*
+
+- **Evaluation Metrics**: The results used to measure the performance of the trained model.
+  - **Accuracy**: Overall correctness.
+  - **RMSE**: Root Mean Squared Error (added for completeness).
+  - **Confusion Matrix**: Detailed breakdown of predictions.  
+  *Location: `evaluation/metrics.py`*
+
 ## 📁 Project Structure
 
 ```

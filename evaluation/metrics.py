@@ -1,9 +1,16 @@
 """
-Metrics - Evaluation metrics for classification.
+Metrics - Evaluation metrics for classification and regression.
+
+TERMINOLOGY CLARIFICATION:
+These are "Evaluation Metrics" (results), NOT the Algorithm.
+- They are used to EVALUATE the performance of the trained model.
+- Examples: Accuracy, Precision, Recall, F1-Score, RMSE.
+- Do not confuse these with the internal math functions used by the algorithm.
 """
 
 import sys
 import os
+import math
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
@@ -11,6 +18,10 @@ from custom_ds.hash_table import HashTable
 
 
 def accuracy(y_true, y_pred):
+    """
+    Calculate the proportion of correct predictions.
+    Formula: (TP + TN) / Total
+    """
     if len(y_true) != len(y_pred):
         raise ValueError("y_true and y_pred must have same length")
     
@@ -23,6 +34,70 @@ def accuracy(y_true, y_pred):
             correct += 1
     
     return correct / len(y_true)
+
+
+def mean_squared_error(y_true, y_pred):
+    """
+    Calculate Mean Squared Error (MSE).
+    Automatically encodes string labels to integers if needed.
+    """
+    if len(y_true) != len(y_pred):
+        raise ValueError("y_true and y_pred must have same length")
+        
+    if len(y_true) == 0:
+        return 0.0
+    
+    # Check if we need to encode (if data is strings)
+    needs_encoding = False
+    if len(y_true) > 0 and isinstance(y_true[0], str):
+        needs_encoding = True
+    
+    if needs_encoding:
+        # Create a simple mapping for string labels to 0, 1, 2...
+        label_set = HashTable()
+        for label in y_true:
+            label_set.put(label, True)
+        for label in y_pred:
+            label_set.put(label, True)
+            
+        unique_labels = sorted(label_set.keys())
+        label_map = {label: i for i, label in enumerate(unique_labels)}
+        
+        y_true_encoded = [label_map[y] for y in y_true]
+        y_pred_encoded = [label_map[y] for y in y_pred]
+        
+    else:
+        # Already numeric (hopefully)
+        y_true_encoded = y_true
+        y_pred_encoded = y_pred
+        
+    sum_squared_error = 0.0
+    valid_count = 0
+    
+    for true, pred in zip(y_true_encoded, y_pred_encoded):
+        try:
+            t_val = float(true)
+            p_val = float(pred)
+            
+            diff = t_val - p_val
+            sum_squared_error += diff * diff
+            valid_count += 1
+        except (ValueError, TypeError):
+            pass
+            
+    if valid_count == 0:
+        return 0.0
+        
+    return sum_squared_error / valid_count
+
+
+def root_mean_squared_error(y_true, y_pred):
+    """
+    Calculate Root Mean Squared Error (RMSE).
+    Formula: sqrt(MSE)
+    """
+    mse = mean_squared_error(y_true, y_pred)
+    return math.sqrt(mse)
 
 
 def confusion_matrix(y_true, y_pred, labels=None):
@@ -139,3 +214,4 @@ def print_confusion_matrix(y_true, y_pred, labels=None):
         print(row_str)
     
     print("-" * (max_label_len + 5 + len(labels) * 8))
+

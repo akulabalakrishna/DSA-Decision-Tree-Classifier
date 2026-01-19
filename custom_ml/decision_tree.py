@@ -1,5 +1,16 @@
 """
 Decision Tree Classifier - CART-style recursive tree builder.
+
+ALGORITHM CLARIFICATION:
+This module implements the "Algorithm" - the procedural logic that builds the model.
+It uses the CART (Classification and Regression Trees) approach:
+1. Start at the root node with all samples
+2. For each node, iterate through all features to find the best split
+3. Split criteria is determined by Mathematical Functions (Gini Efficiency) calling 'splitter.py'
+4. Recursively repeat the process for child nodes
+5. Stop when max_depth is reached or node is pure (Pre-pruning)
+
+This is NOT a heuristic; it is a systematic, recursive search procedure.
 """
 
 import sys

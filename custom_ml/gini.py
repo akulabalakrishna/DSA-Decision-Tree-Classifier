@@ -1,5 +1,11 @@
 """
-Gini Impurity - Implementation of Gini impurity measure for decision tree splits.
+Gini Impurity - Mathematical Functions for split quality.
+
+TERMINOLOGY CLARIFICATION:
+These are "Mathematical Functions" (tools), NOT the Algorithm.
+- They are used to MEASURE the purity of a node.
+- The Algorithm (Decision Tree) uses these tools to make decisions.
+- Gini Impurity formula: 1 - sum(p_i^2)
 """
 
 import sys

@@ -1,0 +1,28 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Data (Keep custom data, ignore large downloads if needed, but for now we keep adult.csv/data)
+# data/
+
+# Outputs and Logs
+outputs/
+*.log
+
+# Environment
+.env
+.venv
+venv/
+env/
+
+# IDE settings
+.idea/
+.vscode/
+
+# System
+.DS_Store
+Thumbs.db
+
+# Do NOT ignore the PDF report as per user request
+# dsa_progress_report_milestone_2.pdf
