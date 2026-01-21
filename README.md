@@ -169,19 +169,19 @@ DSA-Decision-Tree-Classifier/
 
 ## 7. Troubleshooting
 
-### 1. "Python is not recognized as an internal or external command"
+**1. "Python is not recognized as an internal or external command"**
 **Cause:** Python is not added to your system PATH.
 **Fix:** Reinstall Python and check the box "Add Python to PATH" during installation, or try running `py main.py` or `python3 main.py`.
 
-### 2. "ModuleNotFoundError: No module named 'numpy'/'pandas'..."
+**2. "ModuleNotFoundError: No module named 'numpy'/'pandas'..."**
 **Cause:** Dependencies are not installed in the current environment.
 **Fix:** Ensure your virtual environment is active and run `pip install -r requirements.txt`.
 
-### 3. "FileNotFoundError: No dataset file found in data/"
+**3. "FileNotFoundError: No dataset file found in data/"**
 **Cause:** The `adult.csv` or `adult.data` file is missing.
 **Fix:** Download the "Adult" dataset from the UCI Machine Learning Repository and place the files in the `data/` folder as structured above.
 
-### 4. "ImportError: cannot import name..."
+**4. "ImportError: cannot import name..."**
 **Cause:** Circular imports or corrupted `.pyc` files.
 **Fix:** Delete all `__pycache__` folders and run the script again.
 
