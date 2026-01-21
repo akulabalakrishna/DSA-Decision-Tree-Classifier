@@ -21,6 +21,7 @@ class Config:
     LOGS_DIR = os.path.join(OUTPUT_DIR, "logs")
     METRICS_DIR = os.path.join(OUTPUT_DIR, "metrics")
     TREES_DIR = os.path.join(OUTPUT_DIR, "trees")
+    PLOTS_DIR = os.path.join(OUTPUT_DIR, "plots")
     
     RESULTS_FILE = "results.txt"
     TREE_FILE = "tree_structure.txt"
@@ -59,7 +60,8 @@ class Config:
             os.path.join(base_path, cls.OUTPUT_DIR),
             os.path.join(base_path, cls.LOGS_DIR),
             os.path.join(base_path, cls.METRICS_DIR),
-            os.path.join(base_path, cls.TREES_DIR)
+            os.path.join(base_path, cls.TREES_DIR),
+            os.path.join(base_path, cls.PLOTS_DIR)
         ]
         
         for dir_path in dirs:

@@ -27,6 +27,7 @@ from preprocessing.cleaner import clean_data
 from preprocessing.encoder import DataEncoder
 
 from evaluation.metrics import accuracy, classification_report, print_confusion_matrix, root_mean_squared_error
+from evaluation.visualization import plot_confusion_matrix, plot_metrics, visualize_tree
 from evaluation.benchmark import compare_with_sklearn
 
 from utils.config import Config
@@ -169,6 +170,25 @@ def evaluate_model(model, train_data, train_labels, test_data, test_labels):
     print(classification_report(test_labels, test_predictions))
     print_confusion_matrix(test_labels, test_predictions)
     
+    # Generate Plots
+    Config.ensure_output_dirs(PROJECT_ROOT)
+    plots_path = os.path.join(PROJECT_ROOT, Config.PLOTS_DIR)
+    
+    # 1. Confusion Matrix Plot
+    cm_path = os.path.join(plots_path, "confusion_matrix.png")
+    plot_confusion_matrix(test_labels, test_predictions, 
+                          title=f"Confusion Matrix (Test Accuracy: {test_accuracy*100:.2f}%)",
+                          save_path=cm_path)
+    
+    # 2. Metrics Plot
+    metrics_path = os.path.join(plots_path, "metrics.png")
+    metrics_data = {
+        'Train Accuracy': train_accuracy,
+        'Test Accuracy': test_accuracy,
+        'Test RMSE': test_rmse
+    }
+    plot_metrics(metrics_data, save_path=metrics_path)
+    
     return {
         'train_accuracy': train_accuracy,
         'test_accuracy': test_accuracy,
@@ -219,6 +239,10 @@ def save_results(results, model, feature_names):
         f.write(model.get_tree_string(max_depth=5))
     
     print(f"Tree structure saved to: {tree_path}")
+    
+    # 3. Decision Tree Visualization
+    tree_plot_path = os.path.join(PROJECT_ROOT, Config.PLOTS_DIR, "decision_tree.png")
+    visualize_tree(model, save_path=tree_plot_path)
 
 
 def main():
